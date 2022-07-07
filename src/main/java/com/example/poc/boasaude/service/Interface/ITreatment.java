@@ -12,4 +12,6 @@ public interface ITreatment {
     Treatment addTreatment(Treatment treatment);
 
     void removeTreatment(String id);
+
+    List<Treatment> getTreatmentsByUser(String user);
 }

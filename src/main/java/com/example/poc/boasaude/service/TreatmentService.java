@@ -64,6 +64,7 @@ public class TreatmentService implements ITreatment {
         req_payload.put("description", treatment.getDescription());
         req_payload.put("createAt", treatment.getCreateAt());
         req_payload.put("treatmentDate", treatment.getTreatmentDate());
+        req_payload.put("user", treatment.getUser());
 
         HttpEntity<?> request = new HttpEntity<>(req_payload, headers);
 
@@ -78,5 +79,16 @@ public class TreatmentService implements ITreatment {
     public void removeTreatment(String id) {
         String url = "http://localhost:8082/treatment/" + id;
         this.restTemplate.delete(url);
+    }
+
+    @Override
+    public List<Treatment> getTreatmentsByUser(String user) {
+        String url = "http://localhost:8082/treatment/user/"+user;
+        List<Treatment> treatments = new ArrayList<>();
+        ResponseEntity<List> responseEntity = this.restTemplate.getForEntity(url, List.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            treatments = (List<Treatment>) responseEntity.getBody();
+        }
+        return treatments;
     }
 }

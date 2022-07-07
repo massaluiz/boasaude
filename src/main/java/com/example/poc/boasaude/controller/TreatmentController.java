@@ -24,6 +24,11 @@ public class TreatmentController {
         return iTreatment.getTreatment(id);
     }
 
+    @GetMapping("/treatment/user/{user}")
+    public List<Treatment> getTreatmentsByUser(@PathVariable String user) {
+        return iTreatment.getTreatmentsByUser(user);
+    }
+
     @PostMapping("/treatment")
     public Treatment addTreatment(@RequestBody Treatment treatment) {
         return iTreatment.addTreatment(treatment);
