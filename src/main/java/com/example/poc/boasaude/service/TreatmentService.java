@@ -12,6 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,9 +63,16 @@ public class TreatmentService implements ITreatment {
         Map req_payload = new HashMap();
         req_payload.put("title", treatment.getTitle());
         req_payload.put("description", treatment.getDescription());
-        req_payload.put("createAt", treatment.getCreateAt());
-        req_payload.put("treatmentDate", treatment.getTreatmentDate());
+        req_payload.put("createAt", LocalDateTime.now());
+        req_payload.put("treatmentDate", LocalDateTime.of(
+                Integer.parseInt(treatment.getTreatmentDate().substring(0,4)),
+                Integer.parseInt(treatment.getTreatmentDate().substring(6,7)),
+                Integer.parseInt(treatment.getTreatmentDate().substring(8,10)),
+                0,
+                0,
+                0));
         req_payload.put("user", treatment.getUser());
+        req_payload.put("speciality", treatment.getSpeciality());
 
         HttpEntity<?> request = new HttpEntity<>(req_payload, headers);
 

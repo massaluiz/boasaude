@@ -18,7 +18,8 @@ public class Treatment {
     private UUID id;
     private String title;
     private String description;
-    private LocalDateTime createAt;
-    private LocalDateTime treatmentDate;
+    private String createAt;
+    private String treatmentDate;
+    private String speciality;
     private String user;
 }
