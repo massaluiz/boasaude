@@ -1,5 +1,6 @@
 package com.example.poc.boasaude.service;
 
+import com.example.poc.boasaude.model.Track;
 import com.example.poc.boasaude.model.Treatment;
 import com.example.poc.boasaude.service.Interface.ITreatment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,17 @@ public class TreatmentService implements ITreatment {
         ResponseEntity<List> responseEntity = this.restTemplate.getForEntity(url, List.class);
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             treatments = (List<Treatment>) responseEntity.getBody();
+        }
+        return treatments;
+    }
+
+    @Override
+    public List<Track> getAll() {
+        String url = "http://localhost:8082/tracks";
+        List<Track> treatments = new ArrayList<>();
+        ResponseEntity<List> responseEntity = this.restTemplate.getForEntity(url, List.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            treatments = (List<Track>) responseEntity.getBody();
         }
         return treatments;
     }
