@@ -30,9 +30,11 @@ public class TreatmentService implements ITreatment {
     @Autowired
     private RestTemplate restTemplate;
 
+    String baseUrl = "https://boasaudelegado.herokuapp.com/";
+
     @Override
     public List<Treatment> getAllTreatment() {
-        String url = "http://localhost:8082/treatments";
+        String url = baseUrl + "treatments";
         List<Treatment> treatments = new ArrayList<>();
         ResponseEntity<List> responseEntity = this.restTemplate.getForEntity(url, List.class);
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
@@ -43,7 +45,7 @@ public class TreatmentService implements ITreatment {
 
     @Override
     public Treatment getTreatment(String id) {
-        String url = "http://localhost:8082/treatment/" + id;
+        String url = baseUrl + "treatment/" + id;
         Treatment treatment = new Treatment();
         ResponseEntity<Treatment> responseEntity = this.restTemplate.getForEntity(url, Treatment.class);
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
@@ -54,7 +56,7 @@ public class TreatmentService implements ITreatment {
 
     @Override
     public Treatment addTreatment(Treatment treatment) {
-        String url = "http://localhost:8082/treatment/";
+        String url = baseUrl + "treatment/";
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         Map map = new HashMap<String, String>();
         map.put("Content-Type", "application/json");
@@ -66,9 +68,9 @@ public class TreatmentService implements ITreatment {
         req_payload.put("description", treatment.getDescription());
         req_payload.put("createAt", LocalDateTime.now());
         req_payload.put("treatmentDate", LocalDateTime.of(
-                Integer.parseInt(treatment.getTreatmentDate().substring(0,4)),
-                Integer.parseInt(treatment.getTreatmentDate().substring(6,7)),
-                Integer.parseInt(treatment.getTreatmentDate().substring(8,10)),
+                Integer.parseInt(treatment.getTreatmentDate().substring(0, 4)),
+                Integer.parseInt(treatment.getTreatmentDate().substring(6, 7)),
+                Integer.parseInt(treatment.getTreatmentDate().substring(8, 10)),
                 0,
                 0,
                 0));
@@ -86,13 +88,13 @@ public class TreatmentService implements ITreatment {
 
     @Override
     public void removeTreatment(String id) {
-        String url = "http://localhost:8082/treatment/" + id;
+        String url = baseUrl + "treatment/" + id;
         this.restTemplate.delete(url);
     }
 
     @Override
     public List<Treatment> getTreatmentsByUser(String user) {
-        String url = "http://localhost:8082/treatment/user/"+user;
+        String url = baseUrl + "treatment/user/" + user;
         List<Treatment> treatments = new ArrayList<>();
         ResponseEntity<List> responseEntity = this.restTemplate.getForEntity(url, List.class);
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
@@ -103,7 +105,7 @@ public class TreatmentService implements ITreatment {
 
     @Override
     public List<Track> getAll() {
-        String url = "http://localhost:8082/tracks";
+        String url = baseUrl + "tracks";
         List<Track> treatments = new ArrayList<>();
         ResponseEntity<List> responseEntity = this.restTemplate.getForEntity(url, List.class);
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
