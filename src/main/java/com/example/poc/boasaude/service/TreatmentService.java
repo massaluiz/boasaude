@@ -30,7 +30,8 @@ public class TreatmentService implements ITreatment {
     @Autowired
     private RestTemplate restTemplate;
 
-    String baseUrl = "https://boasaude-legado.herokuapp.com/";
+    //String baseUrl = "https://boasaude-legado.herokuapp.com/";
+    String baseUrl = "http://localhost:8082/";
 
     @Override
     public List<Treatment> getAllTreatment() {
@@ -76,6 +77,8 @@ public class TreatmentService implements ITreatment {
                 0));
         req_payload.put("user", treatment.getUser());
         req_payload.put("speciality", treatment.getSpeciality());
+        req_payload.put("healthInsurance", treatment.getHealthInsurance());
+        req_payload.put("doctor", treatment.getDoctor());
 
         HttpEntity<?> request = new HttpEntity<>(req_payload, headers);
 
