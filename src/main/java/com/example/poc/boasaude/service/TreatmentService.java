@@ -30,8 +30,8 @@ public class TreatmentService implements ITreatment {
     @Autowired
     private RestTemplate restTemplate;
 
-    //String baseUrl = "https://boasaude-legado.herokuapp.com/";
-    String baseUrl = "http://localhost:8082/";
+    String baseUrl = "https://boasaude-legado.herokuapp.com/";
+    //String baseUrl = "http://localhost:8082/";
 
     @Override
     public List<Treatment> getAllTreatment() {
