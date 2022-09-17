@@ -116,4 +116,27 @@ public class TreatmentService implements ITreatment {
         }
         return treatments;
     }
+
+    @Override
+    public List<Treatment> getTreatmentsByStatus(String status) {
+        String url = baseUrl + "treatment/status/" + status;
+        List<Treatment> treatments = new ArrayList<>();
+        ResponseEntity<List> responseEntity = this.restTemplate.getForEntity(url, List.class);
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            treatments = (List<Treatment>) responseEntity.getBody();
+        }
+        return treatments;
+    }
+
+    @Override
+    public void authInsurance(String id) {
+        String url = baseUrl + "treatment/insurance/" + id;
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        Map map = new HashMap<String, String>();
+        map.put("Content-Type", "application/json");
+        headers.setAll(map);
+        Map req_payload = new HashMap();
+        HttpEntity<?> request = new HttpEntity<>(req_payload, headers);
+        this.restTemplate.put(url, request);
+    }
 }

@@ -17,4 +17,8 @@ public interface ITreatment {
     List<Treatment> getTreatmentsByUser(String user);
 
     List<Track> getAll();
+
+    List<Treatment> getTreatmentsByStatus(String status);
+
+    void authInsurance(String id);
 }

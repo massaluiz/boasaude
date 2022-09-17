@@ -29,6 +29,11 @@ public class TreatmentController {
         return iTreatment.getTreatmentsByUser(user);
     }
 
+    @GetMapping("/treatment/status/{status}")
+    public List<Treatment> getTreatmentsByStatus(@PathVariable String status) {
+        return iTreatment.getTreatmentsByStatus(status);
+    }
+
     @PostMapping("/treatment")
     public Treatment addTreatment(@RequestBody Treatment treatment) {
         return iTreatment.addTreatment(treatment);
@@ -37,5 +42,10 @@ public class TreatmentController {
     @DeleteMapping("/treatment/{id}")
     public void removeTreatment(@PathVariable String id) {
         iTreatment.removeTreatment(id);
+    }
+
+    @PutMapping("/treatment/insurance/{id}")
+    public void authInsurance(@PathVariable String id) {
+        iTreatment.authInsurance(id);
     }
 }
